@@ -9,22 +9,23 @@ function handleTabChange(tabId, changeInfo, tab) {
   // Inspect the tab when it's completely loaded and find out if we need
   // to make a favicon change.
   if (changeInfo && changeInfo.status && changeInfo.status === 'complete') {
+    let loaded = false;
     faviconData.forEach((item) => {
       let tabMatched = false;
-      if (tab.url.startsWith(item.origin)) {
-        tabMatched = true;
-        if (item['title-pattern'] && tab.title.indexOf(item['title-pattern']) === -1) {
-          tabMatched = false;
+      if (item.origin) {
+        if (tab.url.match(item.origin)) {
+          tabMatched = true;
         }
       }
 
-      if (tabMatched && item.base64) {
-        const executing = browser.tabs.executeScript({
+      if (tabMatched && (item.base64 || item.titlePrefix)) {
+        const executing = loaded ? Promise.resolve(loaded) : browser.tabs.executeScript({
           file: '/change-favicon.js',
         });
+        loaded = true;
         executing
           .then(() => {
-            return browser.tabs.sendMessage(tab.id, { dataURI: item.base64 });
+            return browser.tabs.sendMessage(tab.id, { dataURI: item.base64, titlePrefix: item.titlePrefix });
           })
           .catch(onError);
       }

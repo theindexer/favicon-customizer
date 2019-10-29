@@ -1,11 +1,11 @@
 {
-  "name": "favicon-customizer",
-  "description": "This extension allows you to customize the favicon for a given url + optional page title match.",
-  "version": "0.4",
+  "name": "favicon + title customizer",
+  "description": "This extension allows you to customize the favicon and prepend text for certain urls or page title matches",
+  "version": "0.5",
   "manifest_version": 2,
   "applications": {
     "gecko": {
-      "id": "favicon-customizer@muffinresearch.co.uk"
+      "id": "favicon-customizer@th3indexer"
     }
   },
   "permissions": [

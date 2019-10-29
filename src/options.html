@@ -12,10 +12,10 @@
           <div class="form-block">
             <label><span>Name:</span><input type="text" name="title" placeholder="My Favicon Name"></label>
             <p class="help">A name for this replacement (<em>optional</em>)</p>
-            <label><span>URL:</span><input type="url" required name="origin" placeholder="https://calendar.google.com"></label>
-            <p class="help">The url to match for favicon replacement. The tab url should <em>start</em> with this string.</p>
-            <label><span>Page title string:</span><input type="text" name="title-pattern"></label>
-            <p class="help">An string to look for anywhere in the page title (<em>optional</em>).</p>
+            <label><span>URL:</span><input type="text" name="origin" placeholder=""></label>
+            <p class="help">A regex to match on the url.</p>
+            <label><span>Title prefix</span><input type="text" name="title-prefix"></label>
+            <p class="help">A prefix to be added before the tab's title (<em>optional</em>).</p>
             <label><span>Custom favicon:</span><input type="file" name="file" class="file-button" accept="image/png"></label>
             <p class="help">Select a valid image (*.png) file to use as your replacement favicon.</p>
             <input type="hidden" name="base64" class="base64" />
@@ -26,8 +26,11 @@
       <div class="buttons">
         <button type="submit">Save Settings</button>
         <button id="add-favicon">Add</button>
+        <button id="js-export">Export</button>
       </div>
     </form>
+    <textarea class="export-area"></textarea>
+    <button type="submit" id="js-import">Import</button>
     <script src="options.js"></script>
   </body>
 </html>
